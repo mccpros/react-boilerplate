@@ -29,7 +29,40 @@ let config = {
      {
        test: /\.css$/,
        use: [ 'style-loader', 'css-loader' ]
-     }
+     },
+     {
+       test: /\.(scss)$/,
+       use: [{
+          loader: 'style-loader', // inject CSS to page
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }, {
+          loader: 'postcss-loader', // Run post css actions
+          options: {
+            plugins: function () { // post css plugins, can be exported to postcss.config.js
+              return [
+                require('autoprefixer')
+              ];
+            }
+          }
+        }, {
+          loader: 'sass-loader' // compiles SASS to CSS
+        }]
+     },
+     {
+      test: /\.(ttf|eot|woff|woff2)$/,
+      loader: 'file-loader',
+      options: {
+        name: 'fonts/[name].[ext]',
+      },
+    },
+    {
+      test: /\.(jpg|png|gif|svg)$/,
+      loader: 'file-loader',
+      options: {
+        name: '[path][name].[hash].[ext]',
+      },
+    },
    ]
   },
   devServer: {

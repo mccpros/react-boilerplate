@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import wpInfo from './wpInfoReducer';
+import session from './sessionReducer';
 
 const rootReducer = combineReducers({
-  wpInfo
+  session
 });
 
 export default rootReducer;

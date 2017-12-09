@@ -1,32 +1,35 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import Game from './Game.jsx';
 // We should probably check prop types
 // const propTypes = {
 //
 // };
+// Style
 
 class Root extends Component {
   componentWillMount() {
-    // Start with an action
-    this.props.fetchInfo();
+    this.props.fetchSession();
   }
 
-  renderInfo() {
-    const { wpInfo } = this.props;
-
-    // If loading, say it
-    if(wpInfo && wpInfo.loading) {
-      return 'Loading...';
-    } else {
-      return wpInfo.data.title;
-    }
+  renderGame() {
+    let { loading } = this.props.session;
+    return (
+      <div>
+        {
+          loading  ?
+          'Loading...' :
+          <Game {...this.props} />
+        }
+      </div>
+    );
   }
 
   render() {
     return (
       <div>
-        <p>{ this.renderInfo() }</p>
+        { this.renderGame() }
       </div>
     );
   }
